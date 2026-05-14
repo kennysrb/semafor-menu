@@ -180,6 +180,47 @@
     #tab5:checked ~ .tab-bar label[for="tab5"] .tab-icon {
       color: var(--gold);
     }
+
+    .category { margin-bottom: 28px; }
+
+    .category-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 12px;
+      font-weight: normal;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      text-transform: uppercase;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(var(--gold-ch), 0.45);
+      margin-bottom: 2px;
+    }
+
+    .item {
+      display: flex;
+      align-items: baseline;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .item-name {
+      color: var(--cream);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .item-dots {
+      flex: 1;
+      border-bottom: 1px dotted rgba(var(--gold-ch), 0.3);
+      margin: 0 10px 3px;
+      min-width: 12px;
+    }
+
+    .item-price {
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
@@ -201,7 +242,25 @@
   </header>
 
   <main class="panels">
-    <div class="panel" id="panel1"><p style="color:white">Panel 1</p></div>
+    <div class="panel" id="panel1">
+      <section class="category">
+        <h2 class="category-title">Topli napici</h2>
+        <div class="item"><span class="item-name">Espreso</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
+        <div class="item"><span class="item-name">Dopio</span><span class="item-dots"></span><span class="item-price">260 rsd</span></div>
+        <div class="item"><span class="item-name">Espreso sa mlekom</span><span class="item-dots"></span><span class="item-price">190 rsd</span></div>
+        <div class="item"><span class="item-name">Ristreto</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
+        <div class="item"><span class="item-name">Lungo</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
+        <div class="item"><span class="item-name">Kapućino</span><span class="item-dots"></span><span class="item-price">210 rsd</span></div>
+        <div class="item"><span class="item-name">Amerikano</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
+        <div class="item"><span class="item-name">Domaća kafa</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
+        <div class="item"><span class="item-name">Flet vajt</span><span class="item-dots"></span><span class="item-price">300 rsd</span></div>
+        <div class="item"><span class="item-name">Makijato</span><span class="item-dots"></span><span class="item-price">190 rsd</span></div>
+        <div class="item"><span class="item-name">Kafe late</span><span class="item-dots"></span><span class="item-price">240 rsd</span></div>
+        <div class="item"><span class="item-name">Espreso sa sojinim mlekom</span><span class="item-dots"></span><span class="item-price">220 rsd</span></div>
+        <div class="item"><span class="item-name">Čaj</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
+        <div class="item"><span class="item-name">Topla čokolada</span><span class="item-dots"></span><span class="item-price">300 rsd</span></div>
+      </section>
+    </div>
     <div class="panel" id="panel2"><p style="color:white">Panel 2</p></div>
     <div class="panel" id="panel3"><p style="color:white">Panel 3</p></div>
     <div class="panel" id="panel4"><p style="color:white">Panel 4</p></div>
