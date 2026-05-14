@@ -58,6 +58,59 @@
     #tab3:checked ~ .panels #panel3 { display: block; }
     #tab4:checked ~ .panels #panel4 { display: block; }
     #tab5:checked ~ .panels #panel5 { display: block; }
+
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: var(--bg);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0 6px;
+      z-index: 100;
+    }
+
+    .logo-placeholder {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      outline: 2px dashed rgba(201, 168, 76, 0.35);
+      outline-offset: -6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    .cafe-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 13px;
+      font-weight: normal;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      margin-top: 5px;
+    }
+
+    .traffic-lights {
+      display: flex;
+      gap: 5px;
+      margin-top: 5px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+    .dot-red   { background: var(--red); }
+    .dot-amber { background: var(--amber); }
+    .dot-green { background: var(--green); }
   </style>
 </head>
 <body>
@@ -67,6 +120,16 @@
   <input type="radio" name="tab" id="tab3">
   <input type="radio" name="tab" id="tab4">
   <input type="radio" name="tab" id="tab5">
+
+  <header class="header">
+    <div class="logo-placeholder">LOGO</div>
+    <h1 class="cafe-title">SEMAFOR CAFFE</h1>
+    <div class="traffic-lights">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-amber"></span>
+      <span class="dot dot-green"></span>
+    </div>
+  </header>
 
   <main class="panels">
     <div class="panel" id="panel1"><p style="color:white">Panel 1</p></div>
