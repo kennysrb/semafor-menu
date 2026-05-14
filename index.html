@@ -33,41 +33,26 @@
       overflow: hidden;
     }
 
+    html {
+      background: url('kafa.png') center/cover no-repeat fixed;
+    }
+
     body {
-      background: var(--bg);
+      background: linear-gradient(rgba(248,244,237,0.84), rgba(248,244,237,0.84));
       color: var(--cream);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: 15px;
       line-height: 1.5;
     }
 
-    input[name="tab"] { display: none; }
-
-    .panels {
-      position: fixed;
-      top: var(--header-h);
-      bottom: var(--tabbar-h);
-      left: 0;
-      right: 0;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    .panels::-webkit-scrollbar { display: none; }
-
-    .panel { display: none; padding: 20px 16px 24px; }
-
-    #tab1:checked ~ .panels #panel1 { display: block; }
-    #tab2:checked ~ .panels #panel2 { display: block; }
-    #tab3:checked ~ .panels #panel3 { display: block; }
-    #tab4:checked ~ .panels #panel4 { display: block; }
-    #tab5:checked ~ .panels #panel5 { display: block; }
-
+    /* ── Header ── */
     .header {
       position: fixed;
       top: 0; left: 0; right: 0;
       height: var(--header-h);
-      background: var(--bg);
+      background: rgba(248,244,237,0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(var(--gold-ch), 0.3);
       display: flex;
       flex-direction: column;
@@ -124,11 +109,36 @@
     .dot-amber { background: var(--amber); }
     .dot-green { background: var(--green); }
 
+    /* ── Scrollable content ── */
+    .panels {
+      position: fixed;
+      top: var(--header-h);
+      bottom: var(--tabbar-h);
+      left: 0;
+      right: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+    .panels::-webkit-scrollbar { display: none; }
+
+    .scroll-section {
+      padding: 24px 16px 32px;
+    }
+
+    .scroll-section + .scroll-section {
+      border-top: 1px solid rgba(var(--gold-ch), 0.2);
+    }
+
+    /* ── Bottom tab bar ── */
     .tab-bar {
       position: fixed;
       bottom: 0; left: 0; right: 0;
       height: var(--tabbar-content-h);
-      background: var(--tab-bg);
+      background: rgba(237,232,222,0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-top: 1px solid rgba(var(--gold-ch), 0.15);
       display: flex;
       padding-bottom: env(safe-area-inset-bottom, 0);
@@ -143,8 +153,11 @@
       justify-content: center;
       gap: 2px;
       cursor: pointer;
+      border: none;
       border-top: 2px solid transparent;
+      background: none;
       -webkit-tap-highlight-color: transparent;
+      transition: border-top-color 0.2s, color 0.2s;
     }
 
     .tab-icon { display: flex; }
@@ -155,35 +168,23 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--muted);
+      transition: color 0.2s;
     }
 
     .tab-label:active { opacity: 0.7; }
 
-    /* Active tab: gold top border + gold label */
-    #tab1:checked ~ .tab-bar label[for="tab1"],
-    #tab2:checked ~ .tab-bar label[for="tab2"],
-    #tab3:checked ~ .tab-bar label[for="tab3"],
-    #tab4:checked ~ .tab-bar label[for="tab4"],
-    #tab5:checked ~ .tab-bar label[for="tab5"] {
+    /* Active nav state — driven by JS .active class */
+    .tab-label.active {
       border-top-color: var(--gold);
     }
-
-    #tab1:checked ~ .tab-bar label[for="tab1"] .tab-text,
-    #tab2:checked ~ .tab-bar label[for="tab2"] .tab-text,
-    #tab3:checked ~ .tab-bar label[for="tab3"] .tab-text,
-    #tab4:checked ~ .tab-bar label[for="tab4"] .tab-text,
-    #tab5:checked ~ .tab-bar label[for="tab5"] .tab-text {
+    .tab-label.active .tab-text {
+      color: var(--gold);
+    }
+    .tab-label.active .tab-icon {
       color: var(--gold);
     }
 
-    #tab1:checked ~ .tab-bar label[for="tab1"] .tab-icon,
-    #tab2:checked ~ .tab-bar label[for="tab2"] .tab-icon,
-    #tab3:checked ~ .tab-bar label[for="tab3"] .tab-icon,
-    #tab4:checked ~ .tab-bar label[for="tab4"] .tab-icon,
-    #tab5:checked ~ .tab-bar label[for="tab5"] .tab-icon {
-      color: var(--gold);
-    }
-
+    /* ── Menu items ── */
     .category { margin-bottom: 28px; }
 
     .category-title {
@@ -234,12 +235,6 @@
   </style>
 </head>
 <body>
-  <!-- Tab state controllers — must be first in body for ~ sibling selectors -->
-  <input type="radio" name="tab" id="tab1" checked>
-  <input type="radio" name="tab" id="tab2">
-  <input type="radio" name="tab" id="tab3">
-  <input type="radio" name="tab" id="tab4">
-  <input type="radio" name="tab" id="tab5">
 
   <header class="header">
     <div class="logo-placeholder">LOGO</div>
@@ -252,8 +247,9 @@
   </header>
 
   <main class="panels">
-    <div class="panel" id="panel1">
-      <section class="category">
+
+    <section class="scroll-section" id="sec-topli">
+      <div class="category">
         <h2 class="category-title">Topli napici</h2>
         <div class="item"><span class="item-name">Espreso</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
         <div class="item"><span class="item-name">Dopio</span><span class="item-dots"></span><span class="item-price">260 rsd</span></div>
@@ -269,10 +265,11 @@
         <div class="item"><span class="item-name">Espreso sa sojinim mlekom</span><span class="item-dots"></span><span class="item-price">220 rsd</span></div>
         <div class="item"><span class="item-name">Čaj</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
         <div class="item"><span class="item-name">Topla čokolada</span><span class="item-dots"></span><span class="item-price">300 rsd</span></div>
-      </section>
-    </div>
-    <div class="panel" id="panel2">
-      <section class="category">
+      </div>
+    </section>
+
+    <section class="scroll-section" id="sec-hladne">
+      <div class="category">
         <h2 class="category-title">Hladne kafe</h2>
         <div class="item"><span class="item-name">Fredo</span><span class="item-dots"></span><span class="item-price">210 rsd</span></div>
         <div class="item"><span class="item-name">Fredo kapućino</span><span class="item-dots"></span><span class="item-price">240 rsd</span></div>
@@ -281,10 +278,11 @@
         <div class="item"><span class="item-name">Hladni Nes</span><span class="item-dots"></span><span class="item-price">240 rsd</span></div>
         <div class="item"><span class="item-name">Hladni Nes sa sojinim mlekom</span><span class="item-dots"></span><span class="item-price">300 rsd</span></div>
         <div class="item"><span class="item-name">Hladni Late</span><span class="item-dots"></span><span class="item-price">240 rsd</span></div>
-      </section>
-    </div>
-    <div class="panel" id="panel3">
-      <section class="category">
+      </div>
+    </section>
+
+    <section class="scroll-section" id="sec-ukusi">
+      <div class="category">
         <h2 class="category-title">Kafe sa ukusom</h2>
         <div class="item"><span class="item-name">Hejzel ajs late</span><span class="item-dots"></span><span class="item-price">280 rsd</span></div>
         <div class="item"><span class="item-name">Karamel ajs late</span><span class="item-dots"></span><span class="item-price">280 rsd</span></div>
@@ -293,8 +291,8 @@
         <div class="item"><span class="item-name">Hejzel late</span><span class="item-dots"></span><span class="item-price">280 rsd</span></div>
         <div class="item"><span class="item-name">Karamel late</span><span class="item-dots"></span><span class="item-price">280 rsd</span></div>
         <div class="item"><span class="item-name">Vanila late</span><span class="item-dots"></span><span class="item-price">280 rsd</span></div>
-      </section>
-      <section class="category">
+      </div>
+      <div class="category">
         <h2 class="category-title">Dodaci</h2>
         <div class="item"><span class="item-name">Šlag (10 g)</span><span class="item-dots"></span><span class="item-price">50 rsd</span></div>
         <div class="item"><span class="item-name">Sojino mleko (0,5 dl)</span><span class="item-dots"></span><span class="item-price">50 rsd</span></div>
@@ -302,10 +300,11 @@
         <div class="item"><span class="item-name">Karamela (0,2 dl)</span><span class="item-dots"></span><span class="item-price">60 rsd</span></div>
         <div class="item"><span class="item-name">Vanila (0,2 dl)</span><span class="item-dots"></span><span class="item-price">60 rsd</span></div>
         <div class="item"><span class="item-name">Sladoled (50 g)</span><span class="item-dots"></span><span class="item-price">100 rsd</span></div>
-      </section>
-    </div>
-    <div class="panel" id="panel4">
-      <section class="category">
+      </div>
+    </section>
+
+    <section class="scroll-section" id="sec-sokovi">
+      <div class="category">
         <h2 class="category-title">Gazirani sokovi</h2>
         <div class="item"><span class="item-name">Pepsi (0,25 l)</span><span class="item-dots"></span><span class="item-price">210 rsd</span></div>
         <div class="item"><span class="item-name">Pepsi Zero (0,25 l)</span><span class="item-dots"></span><span class="item-price">210 rsd</span></div>
@@ -316,8 +315,8 @@
         <div class="item"><span class="item-name">Everves Biter Lemon (0,25 l)</span><span class="item-dots"></span><span class="item-price">210 rsd</span></div>
         <div class="item"><span class="item-name">Klaker Crveni Kruška (0,25 l)</span><span class="item-dots"></span><span class="item-price">210 rsd</span></div>
         <div class="item"><span class="item-name">Oranžina (0,25 l)</span><span class="item-dots"></span><span class="item-price">280 rsd</span></div>
-      </section>
-      <section class="category">
+      </div>
+      <div class="category">
         <h2 class="category-title">Negazirani sokovi</h2>
         <div class="item"><span class="item-name">Kjub Jabuka (0,2 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></div>
         <div class="item"><span class="item-name">Kjub Narandža (0,2 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></div>
@@ -325,18 +324,19 @@
         <div class="item"><span class="item-name">Kjub Breskva (0,2 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></div>
         <div class="item"><span class="item-name">Kjub Ananas (0,2 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></div>
         <div class="item"><span class="item-name">Kjub Borovnica (0,2 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></div>
-      </section>
-      <section class="category">
+      </div>
+      <div class="category">
         <h2 class="category-title">Vode</h2>
         <div class="item"><span class="item-name">Knjaz Miloš (0,25 l)</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
         <div class="item"><span class="item-name">Akva Viva (0,25 l)</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
         <div class="item"><span class="item-name">Knjaz Limun (0,33 l)</span><span class="item-dots"></span><span class="item-price">240 rsd</span></div>
         <div class="item"><span class="item-name">Knjaz Mandarina (0,33 l)</span><span class="item-dots"></span><span class="item-price">240 rsd</span></div>
         <div class="item"><span class="item-name">Guarana (0,25 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></div>
-      </section>
-    </div>
-    <div class="panel" id="panel5">
-      <section class="category">
+      </div>
+    </section>
+
+    <section class="scroll-section" id="sec-alkohol">
+      <div class="category">
         <h2 class="category-title">Alkoholna pića</h2>
         <div class="item"><span class="item-name">Niško pivo (0,33 l)</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
         <div class="item"><span class="item-name">Džejmison (0,03 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></div>
@@ -351,8 +351,8 @@
         <div class="item"><span class="item-name">Somerzbi – Mango (0,33 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></div>
         <div class="item"><span class="item-name">Somerzbi – Kruška (0,33 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></div>
         <div class="item"><span class="item-name">Somerzbi – Borovnica (0,33 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></div>
-      </section>
-      <section class="category">
+      </div>
+      <div class="category">
         <h2 class="category-title">Ceđeni sokovi</h2>
         <div class="item"><span class="item-name">Ceđeni sok – Narandža (0,2 l)</span><span class="item-dots"></span><span class="item-price">260 rsd</span></div>
         <div class="item"><span class="item-name">Ceđeni sok – Limun (0,2 l)</span><span class="item-dots"></span><span class="item-price">240 rsd</span></div>
@@ -361,31 +361,62 @@
         <div class="item"><span class="item-name">Pič sanset (0,2 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></div>
         <div class="item"><span class="item-name">Razberi sanset (0,2 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></div>
         <div class="item"><span class="item-name">Pajnapl sanset (0,2 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></div>
-      </section>
-    </div>
+      </div>
+    </section>
+
   </main>
 
   <nav class="tab-bar">
-    <label for="tab1" class="tab-label">
+    <button class="tab-label active" data-target="sec-topli">
       <span class="tab-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg></span>
       <span class="tab-text">Topli</span>
-    </label>
-    <label for="tab2" class="tab-label">
+    </button>
+    <button class="tab-label" data-target="sec-hladne">
       <span class="tab-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"/><polyline points="8 6 12 2 16 6"/><polyline points="16 18 12 22 8 18"/><polyline points="6 8 2 12 6 16"/><polyline points="18 16 22 12 18 8"/></svg></span>
       <span class="tab-text">Hladne</span>
-    </label>
-    <label for="tab3" class="tab-label">
+    </button>
+    <button class="tab-label" data-target="sec-ukusi">
       <span class="tab-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
       <span class="tab-text">Ukusi</span>
-    </label>
-    <label for="tab4" class="tab-label">
+    </button>
+    <button class="tab-label" data-target="sec-sokovi">
       <span class="tab-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span>
       <span class="tab-text">Sokovi</span>
-    </label>
-    <label for="tab5" class="tab-label">
+    </button>
+    <button class="tab-label" data-target="sec-alkohol">
       <span class="tab-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="M6 2h12"/><path d="M6 2c0 6 2.5 9 6 9s6-3 6-9"/></svg></span>
       <span class="tab-text">Alkohol</span>
-    </label>
+    </button>
   </nav>
+
+  <script>
+    const panels = document.querySelector('.panels');
+    const sections = Array.from(document.querySelectorAll('.scroll-section'));
+    const navBtns = Array.from(document.querySelectorAll('.tab-label'));
+
+    // Click: smooth scroll to section
+    navBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = document.getElementById(btn.dataset.target);
+        panels.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+      });
+    });
+
+    // Scroll spy: highlight nav item for the section most in view
+    function updateActive() {
+      const scrollTop = panels.scrollTop;
+      const trigger = panels.clientHeight * 0.35;
+      let current = sections[0].id;
+      sections.forEach(sec => {
+        if (sec.offsetTop <= scrollTop + trigger) current = sec.id;
+      });
+      navBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.target === current);
+      });
+    }
+
+    panels.addEventListener('scroll', updateActive, { passive: true });
+  </script>
+
 </body>
 </html>
