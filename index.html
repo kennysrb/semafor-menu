@@ -9,6 +9,7 @@
       --bg:       #0d1b2a;
       --surface:  #112236;
       --gold:     #c9a84c;
+      --gold-ch:  201, 168, 76;
       --cream:    #e8dcc8;
       --muted:    #7a8fa6;
       --tab-bg:   #0a1520;
@@ -64,7 +65,7 @@
       top: 0; left: 0; right: 0;
       height: var(--header-h);
       background: var(--bg);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+      border-bottom: 1px solid rgba(var(--gold-ch), 0.3);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -78,14 +79,22 @@
       height: 64px;
       border-radius: 50%;
       border: 2px solid var(--gold);
-      outline: 2px dashed rgba(201, 168, 76, 0.35);
-      outline-offset: -6px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--muted);
       font-size: 10px;
       letter-spacing: 0.1em;
+      position: relative;
+    }
+
+    .logo-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(var(--gold-ch), 0.45);
+      pointer-events: none;
     }
 
     .cafe-title {
