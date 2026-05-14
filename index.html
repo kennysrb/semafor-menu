@@ -17,7 +17,8 @@
       --amber:    #e8a020;
       --green:    #2e9e5b;
       --header-h: 110px;
-      --tabbar-h: 64px;
+      --tabbar-content-h: 64px;
+      --tabbar-h: calc(var(--tabbar-content-h) + env(safe-area-inset-bottom, 0px));
     }
 
     *, *::before, *::after {
@@ -124,7 +125,7 @@
     .tab-bar {
       position: fixed;
       bottom: 0; left: 0; right: 0;
-      height: var(--tabbar-h);
+      height: var(--tabbar-content-h);
       background: var(--tab-bg);
       border-top: 1px solid rgba(var(--gold-ch), 0.15);
       display: flex;
@@ -153,6 +154,8 @@
       color: var(--muted);
     }
 
+    .tab-label:active { opacity: 0.7; }
+
     /* Active tab: gold top border + gold label */
     #tab1:checked ~ .tab-bar label[for="tab1"],
     #tab2:checked ~ .tab-bar label[for="tab2"],
@@ -167,6 +170,14 @@
     #tab3:checked ~ .tab-bar label[for="tab3"] .tab-text,
     #tab4:checked ~ .tab-bar label[for="tab4"] .tab-text,
     #tab5:checked ~ .tab-bar label[for="tab5"] .tab-text {
+      color: var(--gold);
+    }
+
+    #tab1:checked ~ .tab-bar label[for="tab1"] .tab-icon,
+    #tab2:checked ~ .tab-bar label[for="tab2"] .tab-icon,
+    #tab3:checked ~ .tab-bar label[for="tab3"] .tab-icon,
+    #tab4:checked ~ .tab-bar label[for="tab4"] .tab-icon,
+    #tab5:checked ~ .tab-bar label[for="tab5"] .tab-icon {
       color: var(--gold);
     }
   </style>
