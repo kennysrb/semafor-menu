@@ -252,14 +252,36 @@
       position: relative;
       z-index: 1;
       margin-top: calc(-1 * (100vh - var(--header-h) - var(--tabbar-h)) * 0.8);
-      padding: 0 16px 40px;
+      padding: 32px 16px 40px;
       background: linear-gradient(
         to bottom,
         rgba(248,244,237,0)    0px,
-        rgba(248,244,237,0.88) 70px,
-        rgba(248,244,237,0.88) 100%
+        rgba(248,244,237,0.90) 80px,
+        rgba(248,244,237,0.90) 100%
       );
     }
+
+    /* ── Footer ── */
+    .site-footer {
+      text-align: center;
+      padding: 24px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: var(--bg);
+      position: relative;
+      z-index: 10;
+    }
+    .site-footer p {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .site-footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .site-footer a:hover { text-decoration: underline; }
 
     /* ── Scroll entrance ── */
     .category-title,
@@ -413,6 +435,11 @@
         <div class="item"><span class="item-name">Pajnapl sanset (0,2 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></div>
       </div>
     </section>
+
+    <footer class="site-footer">
+      <p>Designed &amp; built by <a href="https://www.webmasters-pro.com/sr" target="_blank" rel="noopener">Webmasters Pro</a></p>
+      <p>· &nbsp;© 2026 Webmasters Pro. All rights reserved.</p>
+    </footer>
 
   </main>
 
