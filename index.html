@@ -36,8 +36,44 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: 15px;
     }
+
+    input[name="tab"] { display: none; }
+
+    .panels {
+      position: fixed;
+      top: var(--header-h);
+      bottom: var(--tabbar-h);
+      left: 0;
+      right: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .panels::-webkit-scrollbar { display: none; }
+
+    .panel { display: none; padding: 20px 16px 24px; }
+
+    #tab1:checked ~ .panels #panel1 { display: block; }
+    #tab2:checked ~ .panels #panel2 { display: block; }
+    #tab3:checked ~ .panels #panel3 { display: block; }
+    #tab4:checked ~ .panels #panel4 { display: block; }
+    #tab5:checked ~ .panels #panel5 { display: block; }
   </style>
 </head>
 <body>
+  <!-- Tab state controllers — must be first in body for ~ sibling selectors -->
+  <input type="radio" name="tab" id="tab1" checked>
+  <input type="radio" name="tab" id="tab2">
+  <input type="radio" name="tab" id="tab3">
+  <input type="radio" name="tab" id="tab4">
+  <input type="radio" name="tab" id="tab5">
+
+  <main class="panels">
+    <div class="panel" id="panel1"><p style="color:white">Panel 1</p></div>
+    <div class="panel" id="panel2"><p style="color:white">Panel 2</p></div>
+    <div class="panel" id="panel3"><p style="color:white">Panel 3</p></div>
+    <div class="panel" id="panel4"><p style="color:white">Panel 4</p></div>
+    <div class="panel" id="panel5"><p style="color:white">Panel 5</p></div>
+  </main>
 </body>
 </html>
