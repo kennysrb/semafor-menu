@@ -62,27 +62,11 @@
       z-index: 100;
     }
 
-    .logo-placeholder {
-      width: 64px;
-      height: 64px;
+    .logo-img {
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
-      border: 2px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      position: relative;
-    }
-
-    .logo-placeholder::before {
-      content: '';
-      position: absolute;
-      inset: 5px;
-      border-radius: 50%;
-      border: 1.5px dashed rgba(var(--gold-ch), 0.45);
-      pointer-events: none;
+      object-fit: cover;
     }
 
     .cafe-title {
@@ -238,7 +222,7 @@
 <body>
 
   <header class="header">
-    <div class="logo-placeholder">LOGO</div>
+    <img class="logo-img" src="logo.png" alt="Semafor Caffe">
     <h1 class="cafe-title">SEMAFOR CAFFE</h1>
     <div class="traffic-lights">
       <span class="dot dot-red"></span>
