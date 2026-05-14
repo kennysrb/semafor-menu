@@ -33,12 +33,8 @@
       overflow: hidden;
     }
 
-    html {
-      background: url('kafa.png') center/cover no-repeat fixed;
-    }
-
     body {
-      background: linear-gradient(rgba(248,244,237,0.84), rgba(248,244,237,0.84));
+      background: var(--bg);
       color: var(--cream);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: 15px;
@@ -50,9 +46,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       height: var(--header-h);
-      background: rgba(248,244,237,0.82);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: var(--bg);
       border-bottom: 1px solid rgba(var(--gold-ch), 0.3);
       display: flex;
       flex-direction: column;
@@ -94,11 +88,11 @@
     .panels::-webkit-scrollbar { display: none; }
 
     .scroll-section {
-      padding: 24px 16px 32px;
+      /* plain container — hero + content handle their own layout */
     }
 
     .scroll-section + .scroll-section {
-      border-top: 1px solid rgba(var(--gold-ch), 0.2);
+      margin-top: 0;
     }
 
     /* ── Bottom tab bar ── */
@@ -106,9 +100,7 @@
       position: fixed;
       bottom: 0; left: 0; right: 0;
       height: var(--tabbar-content-h);
-      background: rgba(237,232,222,0.82);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: var(--tab-bg);
       border-top: 1px solid rgba(var(--gold-ch), 0.15);
       display: flex;
       padding-bottom: env(safe-area-inset-bottom, 0);
@@ -166,9 +158,20 @@
       color: var(--gold);
       text-transform: uppercase;
       padding-bottom: 8px;
-      border-bottom: 1px solid rgba(var(--gold-ch), 0.45);
       margin-bottom: 8px;
+      position: relative;
+      text-shadow: 0 0 16px rgba(248,244,237,1), 0 0 32px rgba(248,244,237,1);
     }
+    .category-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 1px;
+      width: 0;
+      background: rgba(var(--gold-ch), 0.45);
+      transition: width 0.7s ease-out 0.1s;
+    }
+    .category-title.visible::after { width: 100%; }
 
     .item {
       display: flex;
@@ -203,6 +206,73 @@
       font-weight: 500;
       flex-shrink: 0;
     }
+    /* ── Keyframes ── */
+    @keyframes slideDown {
+      from { transform: translateY(-24px); opacity: 0; }
+      to   { transform: translateY(0);     opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(24px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    @keyframes kenburns {
+      from { transform: scale(1);    }
+      to   { transform: scale(1.08); }
+    }
+    @keyframes logoPulse {
+      0%, 100% { transform: scale(1);    }
+      50%       { transform: scale(1.04); }
+    }
+
+    /* ── Page load entrances ── */
+    .header  { animation: slideDown 0.7s ease-out both; }
+    .tab-bar { animation: slideUp  0.7s ease-out 0.1s both; }
+    .logo-img { animation: logoPulse 5s ease-in-out infinite; }
+
+    /* ── Section hero: sticky, fills viewport between header and tabbar ── */
+    .section-hero {
+      position: sticky;
+      top: 0;
+      height: calc(100vh - var(--header-h) - var(--tabbar-h));
+      overflow: hidden;
+      z-index: 0;
+    }
+    .section-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 50%;
+      animation: kenburns 9s ease-in-out infinite alternate;
+      transform-origin: center;
+      will-change: transform;
+    }
+
+    /* ── Section content: scrolls over the sticky hero ── */
+    .section-content {
+      position: relative;
+      z-index: 1;
+      margin-top: calc(-1 * (100vh - var(--header-h) - var(--tabbar-h)) * 0.8);
+      padding: 0 16px 40px;
+      background: linear-gradient(
+        to bottom,
+        rgba(248,244,237,0)    0px,
+        rgba(248,244,237,0.88) 70px,
+        rgba(248,244,237,0.88) 100%
+      );
+    }
+
+    /* ── Scroll entrance ── */
+    .category-title,
+    .item {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+    }
+    .category-title.visible,
+    .item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -215,6 +285,8 @@
   <main class="panels">
 
     <section class="scroll-section" id="sec-topli">
+      <div class="section-hero"><img src="kafa.png" alt=""></div>
+      <div class="section-content">
       <div class="category">
         <h2 class="category-title">Topli napici</h2>
         <div class="item"><span class="item-name">Espreso</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
@@ -232,9 +304,12 @@
         <div class="item"><span class="item-name">Čaj</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
         <div class="item"><span class="item-name">Topla čokolada</span><span class="item-dots"></span><span class="item-price">300 rsd</span></div>
       </div>
+      </div>
     </section>
 
     <section class="scroll-section" id="sec-hladne">
+      <div class="section-hero"><img src="hladni.png" alt=""></div>
+      <div class="section-content">
       <div class="category">
         <h2 class="category-title">Hladne kafe</h2>
         <div class="item"><span class="item-name">Fredo</span><span class="item-dots"></span><span class="item-price">210 rsd</span></div>
@@ -245,9 +320,12 @@
         <div class="item"><span class="item-name">Hladni Nes sa sojinim mlekom</span><span class="item-dots"></span><span class="item-price">300 rsd</span></div>
         <div class="item"><span class="item-name">Hladni Late</span><span class="item-dots"></span><span class="item-price">240 rsd</span></div>
       </div>
+      </div>
     </section>
 
     <section class="scroll-section" id="sec-ukusi">
+      <div class="section-hero"><img src="special.png" alt=""></div>
+      <div class="section-content">
       <div class="category">
         <h2 class="category-title">Kafe sa ukusom</h2>
         <div class="item"><span class="item-name">Hejzel ajs late</span><span class="item-dots"></span><span class="item-price">280 rsd</span></div>
@@ -267,9 +345,12 @@
         <div class="item"><span class="item-name">Vanila (0,2 dl)</span><span class="item-dots"></span><span class="item-price">60 rsd</span></div>
         <div class="item"><span class="item-name">Sladoled (50 g)</span><span class="item-dots"></span><span class="item-price">100 rsd</span></div>
       </div>
+      </div>
     </section>
 
     <section class="scroll-section" id="sec-sokovi">
+      <div class="section-hero"><img src="sok.png" alt=""></div>
+      <div class="section-content">
       <div class="category">
         <h2 class="category-title">Gazirani sokovi</h2>
         <div class="item"><span class="item-name">Pepsi (0,25 l)</span><span class="item-dots"></span><span class="item-price">210 rsd</span></div>
@@ -299,9 +380,12 @@
         <div class="item"><span class="item-name">Knjaz Mandarina (0,33 l)</span><span class="item-dots"></span><span class="item-price">240 rsd</span></div>
         <div class="item"><span class="item-name">Guarana (0,25 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></div>
       </div>
+      </div>
     </section>
 
     <section class="scroll-section" id="sec-alkohol">
+      <div class="section-hero"><img src="alkohol.png" alt=""></div>
+      <div class="section-content">
       <div class="category">
         <h2 class="category-title">Alkoholna pića</h2>
         <div class="item"><span class="item-name">Niško pivo (0,33 l)</span><span class="item-dots"></span><span class="item-price">180 rsd</span></div>
@@ -382,6 +466,25 @@
     }
 
     panels.addEventListener('scroll', updateActive, { passive: true });
+
+    // Stagger delays: each item within a category staggers 45ms apart
+    document.querySelectorAll('.category').forEach(cat => {
+      cat.querySelectorAll('.item').forEach((item, i) => {
+        item.style.transitionDelay = `${i * 45}ms`;
+      });
+    });
+
+    // Entrance animation: fade items + titles in as they scroll into view
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { root: panels, threshold: 0.05 });
+
+    document.querySelectorAll('.item, .category-title').forEach(el => animObserver.observe(el));
   </script>
 
 </body>
