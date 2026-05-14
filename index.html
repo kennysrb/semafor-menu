@@ -120,6 +120,55 @@
     .dot-red   { background: var(--red); }
     .dot-amber { background: var(--amber); }
     .dot-green { background: var(--green); }
+
+    .tab-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: var(--tabbar-h);
+      background: var(--tab-bg);
+      border-top: 1px solid rgba(var(--gold-ch), 0.15);
+      display: flex;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+      z-index: 100;
+    }
+
+    .tab-label {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      cursor: pointer;
+      border-top: 2px solid transparent;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .tab-icon { font-size: 18px; line-height: 1; }
+
+    .tab-text {
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Active tab: gold top border + gold label */
+    #tab1:checked ~ .tab-bar label[for="tab1"],
+    #tab2:checked ~ .tab-bar label[for="tab2"],
+    #tab3:checked ~ .tab-bar label[for="tab3"],
+    #tab4:checked ~ .tab-bar label[for="tab4"],
+    #tab5:checked ~ .tab-bar label[for="tab5"] {
+      border-top-color: var(--gold);
+    }
+
+    #tab1:checked ~ .tab-bar label[for="tab1"] .tab-text,
+    #tab2:checked ~ .tab-bar label[for="tab2"] .tab-text,
+    #tab3:checked ~ .tab-bar label[for="tab3"] .tab-text,
+    #tab4:checked ~ .tab-bar label[for="tab4"] .tab-text,
+    #tab5:checked ~ .tab-bar label[for="tab5"] .tab-text {
+      color: var(--gold);
+    }
   </style>
 </head>
 <body>
@@ -147,5 +196,28 @@
     <div class="panel" id="panel4"><p style="color:white">Panel 4</p></div>
     <div class="panel" id="panel5"><p style="color:white">Panel 5</p></div>
   </main>
+
+  <nav class="tab-bar">
+    <label for="tab1" class="tab-label">
+      <span class="tab-icon">☕</span>
+      <span class="tab-text">Topli</span>
+    </label>
+    <label for="tab2" class="tab-label">
+      <span class="tab-icon">❄️</span>
+      <span class="tab-text">Hladne</span>
+    </label>
+    <label for="tab3" class="tab-label">
+      <span class="tab-icon">✨</span>
+      <span class="tab-text">Ukusi</span>
+    </label>
+    <label for="tab4" class="tab-label">
+      <span class="tab-icon">🥤</span>
+      <span class="tab-text">Sokovi</span>
+    </label>
+    <label for="tab5" class="tab-label">
+      <span class="tab-icon">🍸</span>
+      <span class="tab-text">Alkohol</span>
+    </label>
+  </nav>
 </body>
 </html>
