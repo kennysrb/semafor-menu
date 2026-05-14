@@ -192,14 +192,14 @@
       text-transform: uppercase;
       padding-bottom: 8px;
       border-bottom: 1px solid rgba(var(--gold-ch), 0.45);
-      margin-bottom: 2px;
+      margin-bottom: 8px;
     }
 
     .item {
       display: flex;
       align-items: baseline;
       padding: 9px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(var(--gold-ch), 0.08);
     }
 
     .item-name {
@@ -210,8 +210,14 @@
 
     .item-dots {
       flex: 1;
-      border-bottom: 1px dotted rgba(var(--gold-ch), 0.3);
-      margin: 0 10px 3px;
+      height: 1px;
+      background: repeating-linear-gradient(
+        to right,
+        rgba(var(--gold-ch), 0.3) 0 3px,
+        transparent 3px 7px
+      );
+      margin: 0 10px;
+      align-self: center;
       min-width: 12px;
     }
 
