@@ -4,19 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f8f4ed" />
+    <meta
+      name="description"
+      content="Semafor Caffe — meni pića. Tople i hladne kafe, kafe sa ukusom, sokovi, ceđeni sokovi i alkoholna pića."
+    />
+    <meta property="og:title" content="Semafor Caffe — Meni" />
+    <meta
+      property="og:description"
+      content="Tople i hladne kafe, kafe sa ukusom, sokovi, ceđeni sokovi i alkoholna pića."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://caffesemafor.com/" />
+    <meta property="og:image" content="https://caffesemafor.com/assets/logo.png" />
+    <link rel="icon" type="image/png" href="assets/logo.png" />
     <title>Semafor Caffe</title>
     <style>
       :root {
         --bg: #f8f4ed;
-        --surface: #ffffff;
         --gold: #9a7020;
         --gold-ch: 154, 112, 32;
-        --cream: #0d1b2a;
+        --ink: #0d1b2a;
         --muted: #7a8fa6;
         --tab-bg: #ede8de;
-        --red: #c42b2b;
-        --amber: #c47d10;
-        --green: #1e7a3a;
         --header-h: 110px;
         --tabbar-content-h: 64px;
         --tabbar-h: calc(
@@ -40,7 +49,7 @@
 
       body {
         background: var(--bg);
-        color: var(--cream);
+        color: var(--ink);
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         font-size: 15px;
         line-height: 1.5;
@@ -93,14 +102,6 @@
       }
       .panels::-webkit-scrollbar {
         display: none;
-      }
-
-      .scroll-section {
-        /* plain container — hero + content handle their own layout */
-      }
-
-      .scroll-section + .scroll-section {
-        margin-top: 0;
       }
 
       /* ── Bottom tab bar ── */
@@ -204,6 +205,10 @@
         width: 100%;
       }
 
+      .menu-list {
+        list-style: none;
+      }
+
       .item {
         display: flex;
         align-items: baseline;
@@ -216,7 +221,7 @@
       }
 
       .item-name {
-        color: var(--cream);
+        color: var(--ink);
         font-size: 14px;
       }
 
@@ -294,6 +299,7 @@
         position: sticky;
         top: 0;
         height: calc(100vh - var(--header-h) - var(--tabbar-h));
+        height: calc(100dvh - var(--header-h) - var(--tabbar-h));
         overflow: hidden;
         z-index: 0;
       }
@@ -313,6 +319,9 @@
         z-index: 1;
         margin-top: calc(
           -1 * (100vh - var(--header-h) - var(--tabbar-h)) * 0.8
+        );
+        margin-top: calc(
+          -1 * (100dvh - var(--header-h) - var(--tabbar-h)) * 0.8
         );
         padding: 32px 16px 40px;
         background: linear-gradient(
@@ -361,464 +370,218 @@
         opacity: 1;
         transform: translateY(0);
       }
+
+      /* ── Reduced motion ── */
+      @media (prefers-reduced-motion: reduce) {
+        .header,
+        .tab-bar,
+        .logo-img,
+        .section-hero img {
+          animation: none;
+        }
+        .panels {
+          scroll-behavior: auto;
+        }
+        .category-title,
+        .item {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        .category-title::after {
+          transition: none;
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
     <header class="header">
-      <img class="logo-img" src="logo.png" alt="Semafor Caffe" />
+      <img class="logo-img" src="assets/logo.png" alt="Semafor Caffe" width="72" height="72" />
       <h1 class="cafe-title">SEMAFOR CAFFE</h1>
     </header>
 
-    <main class="panels">
-      <section class="scroll-section" id="sec-topli">
-        <div class="section-hero"><img src="kafa.png" alt="" /></div>
-        <div class="section-content">
-          <div class="category">
-            <h2 class="category-title">Topli napici</h2>
-            <div class="item">
-              <span class="item-name">Espresso</span
-              ><span class="item-dots"></span
-              ><span class="item-price">180 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Doppio</span
-              ><span class="item-dots"></span
-              ><span class="item-price">260 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Espresso sa mlekom</span
-              ><span class="item-dots"></span
-              ><span class="item-price">190 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Ristretto</span
-              ><span class="item-dots"></span
-              ><span class="item-price">180 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Lungo</span><span class="item-dots"></span
-              ><span class="item-price">180 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Kapućino</span
-              ><span class="item-dots"></span
-              ><span class="item-price">210 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Amerikano</span
-              ><span class="item-dots"></span
-              ><span class="item-price">180 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Domaća kafa</span
-              ><span class="item-dots"></span
-              ><span class="item-price">180 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Flat White</span
-              ><span class="item-dots"></span
-              ><span class="item-price">300 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Macchiato</span
-              ><span class="item-dots"></span
-              ><span class="item-price">190 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Caffè Latte</span
-              ><span class="item-dots"></span
-              ><span class="item-price">240 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Espresso sa sojinim mlekom</span
-              ><span class="item-dots"></span
-              ><span class="item-price">220 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Čaj</span><span class="item-dots"></span
-              ><span class="item-price">180 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Topla čokolada</span
-              ><span class="item-dots"></span
-              ><span class="item-price">300 rsd</span>
+    <div class="panels">
+      <main>
+        <section class="scroll-section" id="sec-topli" aria-labelledby="h-topli">
+          <div class="section-hero">
+            <img src="assets/kafa.webp" alt="" width="638" height="800" fetchpriority="high" />
+          </div>
+          <div class="section-content">
+            <div class="category">
+              <h2 class="category-title" id="h-topli">Topli napici</h2>
+              <ul class="menu-list">
+                <li class="item"><span class="item-name">Espresso</span><span class="item-dots"></span><span class="item-price">180 rsd</span></li>
+                <li class="item"><span class="item-name">Doppio</span><span class="item-dots"></span><span class="item-price">260 rsd</span></li>
+                <li class="item"><span class="item-name">Espresso sa mlekom</span><span class="item-dots"></span><span class="item-price">190 rsd</span></li>
+                <li class="item"><span class="item-name">Ristretto</span><span class="item-dots"></span><span class="item-price">180 rsd</span></li>
+                <li class="item"><span class="item-name">Lungo</span><span class="item-dots"></span><span class="item-price">180 rsd</span></li>
+                <li class="item"><span class="item-name">Kapućino</span><span class="item-dots"></span><span class="item-price">210 rsd</span></li>
+                <li class="item"><span class="item-name">Amerikano</span><span class="item-dots"></span><span class="item-price">180 rsd</span></li>
+                <li class="item"><span class="item-name">Domaća kafa</span><span class="item-dots"></span><span class="item-price">180 rsd</span></li>
+                <li class="item"><span class="item-name">Flat White</span><span class="item-dots"></span><span class="item-price">300 rsd</span></li>
+                <li class="item"><span class="item-name">Macchiato</span><span class="item-dots"></span><span class="item-price">190 rsd</span></li>
+                <li class="item"><span class="item-name">Caffè Latte</span><span class="item-dots"></span><span class="item-price">240 rsd</span></li>
+                <li class="item"><span class="item-name">Espresso sa sojinim mlekom</span><span class="item-dots"></span><span class="item-price">220 rsd</span></li>
+                <li class="item"><span class="item-name">Čaj</span><span class="item-dots"></span><span class="item-price">180 rsd</span></li>
+                <li class="item"><span class="item-name">Topla čokolada</span><span class="item-dots"></span><span class="item-price">300 rsd</span></li>
+              </ul>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="scroll-section" id="sec-hladne">
-        <div class="section-hero"><img src="hladni.png" alt="" /></div>
-        <div class="section-content">
-          <div class="category">
-            <h2 class="category-title">Hladne kafe</h2>
-            <div class="item">
-              <span class="item-name">Freddo</span
-              ><span class="item-dots"></span
-              ><span class="item-price">210 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Freddo Cappuccino</span
-              ><span class="item-dots"></span
-              ><span class="item-price">240 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Affogato</span
-              ><span class="item-dots"></span
-              ><span class="item-price">300 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Iced Coffee</span
-              ><span class="item-dots"></span
-              ><span class="item-price">320 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Hladni Nes</span
-              ><span class="item-dots"></span
-              ><span class="item-price">240 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Hladni Nes sa sojinim mlekom</span
-              ><span class="item-dots"></span
-              ><span class="item-price">300 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Hladni Latte</span
-              ><span class="item-dots"></span
-              ><span class="item-price">240 rsd</span>
+        <section class="scroll-section" id="sec-hladne" aria-labelledby="h-hladne">
+          <div class="section-hero">
+            <img src="assets/hladni.webp" alt="" width="820" height="1278" loading="lazy" />
+          </div>
+          <div class="section-content">
+            <div class="category">
+              <h2 class="category-title" id="h-hladne">Hladne kafe</h2>
+              <ul class="menu-list">
+                <li class="item"><span class="item-name">Freddo</span><span class="item-dots"></span><span class="item-price">210 rsd</span></li>
+                <li class="item"><span class="item-name">Freddo Cappuccino</span><span class="item-dots"></span><span class="item-price">240 rsd</span></li>
+                <li class="item"><span class="item-name">Affogato</span><span class="item-dots"></span><span class="item-price">300 rsd</span></li>
+                <li class="item"><span class="item-name">Iced Coffee</span><span class="item-dots"></span><span class="item-price">320 rsd</span></li>
+                <li class="item"><span class="item-name">Hladni Nes</span><span class="item-dots"></span><span class="item-price">240 rsd</span></li>
+                <li class="item"><span class="item-name">Hladni Nes sa sojinim mlekom</span><span class="item-dots"></span><span class="item-price">300 rsd</span></li>
+                <li class="item"><span class="item-name">Hladni Latte</span><span class="item-dots"></span><span class="item-price">240 rsd</span></li>
+              </ul>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="scroll-section" id="sec-ukusi">
-        <div class="section-hero"><img src="special.png" alt="" /></div>
-        <div class="section-content">
-          <div class="category">
-            <h2 class="category-title">Kafe sa ukusom</h2>
-            <div class="item">
-              <span class="item-name">Hazelnut Iced Latte</span
-              ><span class="item-dots"></span
-              ><span class="item-price">280 rsd</span>
+        <section class="scroll-section" id="sec-ukusi" aria-labelledby="h-ukusi">
+          <div class="section-hero">
+            <img src="assets/special.webp" alt="" width="640" height="984" loading="lazy" />
+          </div>
+          <div class="section-content">
+            <div class="category">
+              <h2 class="category-title" id="h-ukusi">Kafe sa ukusom</h2>
+              <ul class="menu-list">
+                <li class="item"><span class="item-name">Hazelnut Iced Latte</span><span class="item-dots"></span><span class="item-price">280 rsd</span></li>
+                <li class="item"><span class="item-name">Karamel Iced Latte</span><span class="item-dots"></span><span class="item-price">280 rsd</span></li>
+                <li class="item"><span class="item-name">Vanila Iced Latte</span><span class="item-dots"></span><span class="item-price">280 rsd</span></li>
+                <li class="item"><span class="item-name">Iced Mocha</span><span class="item-dots"></span><span class="item-price">280 rsd</span></li>
+                <li class="item"><span class="item-name">Hazelnut Latte</span><span class="item-dots"></span><span class="item-price">280 rsd</span></li>
+                <li class="item"><span class="item-name">Karamel Latte</span><span class="item-dots"></span><span class="item-price">280 rsd</span></li>
+                <li class="item"><span class="item-name">Vanila Latte</span><span class="item-dots"></span><span class="item-price">280 rsd</span></li>
+              </ul>
             </div>
-            <div class="item">
-              <span class="item-name">Karamel Iced Latte</span
-              ><span class="item-dots"></span
-              ><span class="item-price">280 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Vanila Iced Latte</span
-              ><span class="item-dots"></span
-              ><span class="item-price">280 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Iced Mocha</span
-              ><span class="item-dots"></span
-              ><span class="item-price">280 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Hazelnut Latte</span
-              ><span class="item-dots"></span
-              ><span class="item-price">280 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Karamel Latte</span
-              ><span class="item-dots"></span
-              ><span class="item-price">280 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Vanila Latte</span
-              ><span class="item-dots"></span
-              ><span class="item-price">280 rsd</span>
+            <div class="category">
+              <h2 class="category-title">Dodaci</h2>
+              <ul class="menu-list">
+                <li class="item"><span class="item-name">Šlag (10 g)</span><span class="item-dots"></span><span class="item-price">50 rsd</span></li>
+                <li class="item"><span class="item-name">Sojino mleko (0,5 dl)</span><span class="item-dots"></span><span class="item-price">50 rsd</span></li>
+                <li class="item"><span class="item-name">Lešnik (0,2 dl)</span><span class="item-dots"></span><span class="item-price">60 rsd</span></li>
+                <li class="item"><span class="item-name">Karamela (0,2 dl)</span><span class="item-dots"></span><span class="item-price">60 rsd</span></li>
+                <li class="item"><span class="item-name">Vanila (0,2 dl)</span><span class="item-dots"></span><span class="item-price">60 rsd</span></li>
+                <li class="item"><span class="item-name">Sladoled (50 g)</span><span class="item-dots"></span><span class="item-price">100 rsd</span></li>
+              </ul>
             </div>
           </div>
-          <div class="category">
-            <h2 class="category-title">Dodaci</h2>
-            <div class="item">
-              <span class="item-name">Šlag (10 g)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">50 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Sojino mleko (0,5 dl)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">50 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Lešnik (0,2 dl)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">60 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Karamela (0,2 dl)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">60 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Vanila (0,2 dl)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">60 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Sladoled (50 g)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">100 rsd</span>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="scroll-section" id="sec-sokovi">
-        <div class="section-hero"><img src="sok.png" alt="" /></div>
-        <div class="section-content">
-          <div class="category">
-            <h2 class="category-title">Gazirani sokovi</h2>
-            <div class="item">
-              <span class="item-name">Pepsi (0,25 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">210 rsd</span>
+        <section class="scroll-section" id="sec-sokovi" aria-labelledby="h-sokovi">
+          <div class="section-hero">
+            <img src="assets/sok.webp" alt="" width="892" height="1190" loading="lazy" />
+          </div>
+          <div class="section-content">
+            <div class="category">
+              <h2 class="category-title" id="h-sokovi">Gazirani sokovi</h2>
+              <ul class="menu-list">
+                <li class="item"><span class="item-name">Pepsi (0,25 l)</span><span class="item-dots"></span><span class="item-price">210 rsd</span></li>
+                <li class="item"><span class="item-name">Pepsi Zero (0,25 l)</span><span class="item-dots"></span><span class="item-price">210 rsd</span></li>
+                <li class="item"><span class="item-name">Pepsi Twist (0,25 l)</span><span class="item-dots"></span><span class="item-price">210 rsd</span></li>
+                <li class="item"><span class="item-name">Mirinda (0,25 l)</span><span class="item-dots"></span><span class="item-price">210 rsd</span></li>
+                <li class="item"><span class="item-name">7up (0,25 l)</span><span class="item-dots"></span><span class="item-price">210 rsd</span></li>
+                <li class="item"><span class="item-name">Evervess Tonik (0,25 l)</span><span class="item-dots"></span><span class="item-price">210 rsd</span></li>
+                <li class="item"><span class="item-name">Evervess Bitter Lemon (0,25 l)</span><span class="item-dots"></span><span class="item-price">210 rsd</span></li>
+                <li class="item"><span class="item-name">Klaker Crveni Kruška (0,25 l)</span><span class="item-dots"></span><span class="item-price">210 rsd</span></li>
+                <li class="item"><span class="item-name">Oranžina (0,25 l)</span><span class="item-dots"></span><span class="item-price">280 rsd</span></li>
+              </ul>
             </div>
-            <div class="item">
-              <span class="item-name">Pepsi Zero (0,25 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">210 rsd</span>
+            <div class="category">
+              <h2 class="category-title">Negazirani sokovi</h2>
+              <ul class="menu-list">
+                <li class="item"><span class="item-name">Cube Jabuka (0,2 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></li>
+                <li class="item"><span class="item-name">Cube Narandža (0,2 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></li>
+                <li class="item"><span class="item-name">Cube Jagoda (0,2 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></li>
+                <li class="item"><span class="item-name">Cube Breskva (0,2 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></li>
+                <li class="item"><span class="item-name">Cube Ananas (0,2 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></li>
+                <li class="item"><span class="item-name">Cube Borovnica (0,2 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></li>
+              </ul>
             </div>
-            <div class="item">
-              <span class="item-name">Pepsi Twist (0,25 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">210 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Mirinda (0,25 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">210 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">7up (0,25 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">210 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Evervess Tonik (0,25 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">210 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Evervess Bitter Lemon (0,25 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">210 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Klaker Crveni Kruška (0,25 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">210 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Oranžina (0,25 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">280 rsd</span>
+            <div class="category">
+              <h2 class="category-title">Vode</h2>
+              <ul class="menu-list">
+                <li class="item"><span class="item-name">Knjaz Miloš (0,25 l)</span><span class="item-dots"></span><span class="item-price">180 rsd</span></li>
+                <li class="item"><span class="item-name">Akva Viva (0,25 l)</span><span class="item-dots"></span><span class="item-price">180 rsd</span></li>
+                <li class="item"><span class="item-name">Knjaz Limun (0,33 l)</span><span class="item-dots"></span><span class="item-price">240 rsd</span></li>
+                <li class="item"><span class="item-name">Knjaz Mandarina (0,33 l)</span><span class="item-dots"></span><span class="item-price">240 rsd</span></li>
+                <li class="item"><span class="item-name">Guarana (0,25 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></li>
+              </ul>
             </div>
           </div>
-          <div class="category">
-            <h2 class="category-title">Negazirani sokovi</h2>
-            <div class="item">
-              <span class="item-name">Cube Jabuka (0,2 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">220 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Cube Narandža (0,2 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">220 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Cube Jagoda (0,2 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">220 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Cube Breskva (0,2 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">220 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Cube Ananas (0,2 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">220 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Cube Borovnica (0,2 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">220 rsd</span>
-            </div>
-          </div>
-          <div class="category">
-            <h2 class="category-title">Vode</h2>
-            <div class="item">
-              <span class="item-name">Knjaz Miloš (0,25 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">180 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Akva Viva (0,25 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">180 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Knjaz Limun (0,33 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">240 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Knjaz Mandarina (0,33 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">240 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Guarana (0,25 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">220 rsd</span>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="scroll-section" id="sec-alkohol">
-        <div class="section-hero"><img src="alkohol.png" alt="" /></div>
-        <div class="section-content">
-          <div class="category">
-            <h2 class="category-title">Alkoholna pića</h2>
-            <div class="item">
-              <span class="item-name">Niško pivo (0,33 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">180 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Jameson (0,03 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">320 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Gorki list (0,03 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">220 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Rubin Pelinkovac (0,03 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">220 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Zekić (0,03 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">220 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Vodka (0,03 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">250 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Gordon's Gin (0,03 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">280 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Baileys (0,03 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">220 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name"
-                >Belo vino – Rubin Tamjanika (0,187 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">470 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name"
-                >Crno vino – Rubin Cabernet Sauvignon (0,187 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">470 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Somersby – Mango (0,33 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">320 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Somersby – Kruška (0,33 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">320 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Somersby – Borovnica (0,33 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">320 rsd</span>
+        <section class="scroll-section" id="sec-alkohol" aria-labelledby="h-alkohol">
+          <div class="section-hero">
+            <img src="assets/alkohol.webp" alt="" width="960" height="1080" loading="lazy" />
+          </div>
+          <div class="section-content">
+            <div class="category">
+              <h2 class="category-title" id="h-alkohol">Alkoholna pića</h2>
+              <ul class="menu-list">
+                <li class="item"><span class="item-name">Niško pivo (0,33 l)</span><span class="item-dots"></span><span class="item-price">180 rsd</span></li>
+                <li class="item"><span class="item-name">Jameson (0,03 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></li>
+                <li class="item"><span class="item-name">Gorki list (0,03 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></li>
+                <li class="item"><span class="item-name">Rubin Pelinkovac (0,03 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></li>
+                <li class="item"><span class="item-name">Zekić (0,03 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></li>
+                <li class="item"><span class="item-name">Vodka (0,03 l)</span><span class="item-dots"></span><span class="item-price">250 rsd</span></li>
+                <li class="item"><span class="item-name">Gordon's Gin (0,03 l)</span><span class="item-dots"></span><span class="item-price">280 rsd</span></li>
+                <li class="item"><span class="item-name">Baileys (0,03 l)</span><span class="item-dots"></span><span class="item-price">220 rsd</span></li>
+                <li class="item"><span class="item-name">Belo vino – Rubin Tamjanika (0,187 l)</span><span class="item-dots"></span><span class="item-price">470 rsd</span></li>
+                <li class="item"><span class="item-name">Crno vino – Rubin Cabernet Sauvignon (0,187 l)</span><span class="item-dots"></span><span class="item-price">470 rsd</span></li>
+                <li class="item"><span class="item-name">Somersby – Mango (0,33 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></li>
+                <li class="item"><span class="item-name">Somersby – Kruška (0,33 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></li>
+                <li class="item"><span class="item-name">Somersby – Borovnica (0,33 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></li>
+              </ul>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="scroll-section" id="sec-cedjeni">
-        <div class="section-hero"><img src="cedjeni.png" alt="" /></div>
-        <div class="section-content">
-          <div class="category">
-            <h2 class="category-title">Ceđeni sokovi</h2>
-            <div class="item">
-              <span class="item-name">Ceđeni sok – Narandža (0,2 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">260 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Ceđeni sok – Limun (0,2 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">240 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Ceđeni miks (0,2 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">280 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Strawberry Sunset (0,2 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">320 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Peach Sunset (0,2 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">320 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Raspberry Sunset (0,2 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">320 rsd</span>
-            </div>
-            <div class="item">
-              <span class="item-name">Pineapple Sunset (0,2 l)</span
-              ><span class="item-dots"></span
-              ><span class="item-price">320 rsd</span>
+        <section class="scroll-section" id="sec-cedjeni" aria-labelledby="h-cedjeni">
+          <div class="section-hero">
+            <img src="assets/cedjeni.webp" alt="" width="526" height="796" loading="lazy" />
+          </div>
+          <div class="section-content">
+            <div class="category">
+              <h2 class="category-title" id="h-cedjeni">Ceđeni sokovi</h2>
+              <ul class="menu-list">
+                <li class="item"><span class="item-name">Ceđeni sok – Narandža (0,2 l)</span><span class="item-dots"></span><span class="item-price">260 rsd</span></li>
+                <li class="item"><span class="item-name">Ceđeni sok – Limun (0,2 l)</span><span class="item-dots"></span><span class="item-price">240 rsd</span></li>
+                <li class="item"><span class="item-name">Ceđeni miks (0,2 l)</span><span class="item-dots"></span><span class="item-price">280 rsd</span></li>
+                <li class="item"><span class="item-name">Strawberry Sunset (0,2 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></li>
+                <li class="item"><span class="item-name">Peach Sunset (0,2 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></li>
+                <li class="item"><span class="item-name">Raspberry Sunset (0,2 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></li>
+                <li class="item"><span class="item-name">Pineapple Sunset (0,2 l)</span><span class="item-dots"></span><span class="item-price">320 rsd</span></li>
+              </ul>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <footer class="site-footer">
         <p>
           Designed &amp; built by
-          <a
-            href="https://www.webmasters-pro.com/sr"
-            target="_blank"
-            rel="noopener"
-            >Webmasters Pro</a
-          >
+          <a href="https://www.webmasters-pro.com/sr" target="_blank" rel="noopener">Webmasters Pro</a>
         </p>
         <p>· &nbsp;© 2026 Webmasters Pro. All rights reserved.</p>
       </footer>
-    </main>
+    </div>
 
-    <nav class="tab-bar">
-      <button class="tab-label active" data-target="sec-topli">
+    <nav class="tab-bar" aria-label="Kategorije menija">
+      <button type="button" class="tab-label active" data-target="sec-topli" aria-current="true">
         <span class="tab-icon"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
@@ -828,6 +591,7 @@
             stroke-width="1.8"
             stroke-linecap="round"
             stroke-linejoin="round"
+            aria-hidden="true"
           >
             <path d="M17 8h1a4 4 0 0 1 0 8h-1" />
             <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z" />
@@ -837,7 +601,7 @@
         ></span>
         <span class="tab-text">Topli</span>
       </button>
-      <button class="tab-label" data-target="sec-hladne">
+      <button type="button" class="tab-label" data-target="sec-hladne">
         <span class="tab-icon"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
@@ -847,6 +611,7 @@
             stroke-width="1.8"
             stroke-linecap="round"
             stroke-linejoin="round"
+            aria-hidden="true"
           >
             <line x1="12" y1="2" x2="12" y2="22" />
             <line x1="2" y1="12" x2="22" y2="12" />
@@ -859,7 +624,7 @@
         ></span>
         <span class="tab-text">Hladne</span>
       </button>
-      <button class="tab-label" data-target="sec-ukusi">
+      <button type="button" class="tab-label" data-target="sec-ukusi">
         <span class="tab-icon"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
@@ -869,6 +634,7 @@
             stroke-width="1.8"
             stroke-linecap="round"
             stroke-linejoin="round"
+            aria-hidden="true"
           >
             <polygon
               points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
@@ -876,7 +642,7 @@
         ></span>
         <span class="tab-text">Ukusi</span>
       </button>
-      <button class="tab-label" data-target="sec-sokovi">
+      <button type="button" class="tab-label" data-target="sec-sokovi">
         <span class="tab-icon"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
@@ -886,12 +652,13 @@
             stroke-width="1.8"
             stroke-linecap="round"
             stroke-linejoin="round"
+            aria-hidden="true"
           >
             <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" /></svg
         ></span>
         <span class="tab-text">Sokovi</span>
       </button>
-      <button class="tab-label" data-target="sec-alkohol">
+      <button type="button" class="tab-label" data-target="sec-alkohol">
         <span class="tab-icon"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
@@ -901,6 +668,7 @@
             stroke-width="1.8"
             stroke-linecap="round"
             stroke-linejoin="round"
+            aria-hidden="true"
           >
             <path d="M8 22h8" />
             <path d="M12 11v11" />
@@ -909,7 +677,7 @@
         ></span>
         <span class="tab-text">Alkohol</span>
       </button>
-      <button class="tab-label" data-target="sec-cedjeni">
+      <button type="button" class="tab-label" data-target="sec-cedjeni">
         <span class="tab-icon"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
@@ -919,6 +687,7 @@
             stroke-width="1.8"
             stroke-linecap="round"
             stroke-linejoin="round"
+            aria-hidden="true"
           >
             <circle cx="12" cy="12" r="5" />
             <line x1="12" y1="1" x2="12" y2="3" />
@@ -956,7 +725,13 @@
           if (sec.offsetTop <= scrollTop + trigger) current = sec.id;
         });
         navBtns.forEach((btn) => {
-          btn.classList.toggle("active", btn.dataset.target === current);
+          const isActive = btn.dataset.target === current;
+          btn.classList.toggle("active", isActive);
+          if (isActive) {
+            btn.setAttribute("aria-current", "true");
+          } else {
+            btn.removeAttribute("aria-current");
+          }
         });
       }
 
